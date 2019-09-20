@@ -7,6 +7,8 @@ import cn.ucloud.ufile.auth.UfileObjectLocalAuthorization;
 import cn.ucloud.ufile.bean.PutObjectResultBean;
 import cn.ucloud.ufile.exception.UfileClientException;
 import cn.ucloud.ufile.exception.UfileServerException;
+import mapan.demo.exception.CustomizeErrorCode;
+import mapan.demo.exception.CustomizeException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import java.io.InputStream;
@@ -23,7 +25,7 @@ public class UCloudProvider {
     @Value("${ucloud.ufile.bucket-name}")
     private String bucketName;
 
-    @Value("${ucloud.ufile.bucket-region}")
+    @Value("${ucloud.ufile.region}")
     private String region;
 
     @Value("${ucloud.ufile.expires-duration}")
