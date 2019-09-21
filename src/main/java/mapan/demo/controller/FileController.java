@@ -2,6 +2,8 @@ package mapan.demo.controller;
 
 import mapan.demo.Service.FileService;
 import mapan.demo.dto.FileDTO;
+import mapan.demo.exception.CustomizeErrorCode;
+import mapan.demo.exception.CustomizeException;
 import mapan.demo.model.User;
 import mapan.demo.provider.UCloudProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +33,21 @@ public class FileController {
             fileDTO.setFileUrl(fileUrl);
             fileDTO.setMessage("上传成功");
             fileDTO.setFileName(file.getOriginalFilename());
-            User currentUser = (User)request.getSession().getAttribute("user");
-            fileDTO.setOwnerId(currentUser.getId());
-            if(!fileService.isFileNameExist(fileDTO.getFileName())){
-                fileService.insertFile(fileDTO);
-            }else{
-
-            }
+            if(request.getSession().getAttribute("user")!=null){
+                User currentUser = (User)request.getSession().getAttribute("user");
+                fileDTO.setOwnerId(currentUser.getId());
+            }else {
+                throw new CustomizeException(CustomizeErrorCode.NOT_LOGIN);
+            };
             return fileDTO;
+//            if(!fileService.isFileNameExist(fileDTO.getFileName())){
+//                fileService.insertFile(fileDTO);
+//            }else{
+//
+//            }
+
         } catch (Exception e) {
+            System.out.println(e);
             FileDTO fileDTO = new FileDTO();
             fileDTO.setSuccess(0);
             fileDTO.setMessage("上传失败");
