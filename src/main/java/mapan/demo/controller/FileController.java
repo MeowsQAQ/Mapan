@@ -27,25 +27,24 @@ public class FileController {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("upload-file");
         try {
-            String fileUrl = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());
             FileDTO fileDTO = new FileDTO();
-            fileDTO.setSuccess(1);
-            fileDTO.setFileUrl(fileUrl);
-            fileDTO.setMessage("上传成功");
-            fileDTO.setFileName(file.getOriginalFilename());
             if(request.getSession().getAttribute("user")!=null){
+                String fileUrl = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());
+                fileDTO.setSuccess(1);
+                fileDTO.setFileUrl(fileUrl);
+                fileDTO.setMessage("上传成功");
+                fileDTO.setFilename(file.getOriginalFilename());
                 User currentUser = (User)request.getSession().getAttribute("user");
                 fileDTO.setOwnerId(currentUser.getId());
+                if(!fileService.isFileNameExist(fileDTO.getFilename())){
+                    fileService.insertFile(fileDTO);
+                }else{
+                    throw new CustomizeException(CustomizeErrorCode.FILE_ALREADY_EXIST);
+                }
             }else {
                 throw new CustomizeException(CustomizeErrorCode.NOT_LOGIN);
             };
             return fileDTO;
-//            if(!fileService.isFileNameExist(fileDTO.getFileName())){
-//                fileService.insertFile(fileDTO);
-//            }else{
-//
-//            }
-
         } catch (Exception e) {
             System.out.println(e);
             FileDTO fileDTO = new FileDTO();

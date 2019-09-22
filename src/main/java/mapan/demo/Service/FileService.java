@@ -23,7 +23,7 @@ public class FileService {
         }
     }
     public void insertFile(FileDTO fileDTO){
-        if (!isFileNameExist(fileDTO.getFileName())){
+        if (!isFileNameExist(fileDTO.getFilename())){
             fileMapper.insert(fileDTO);
         }
     }
