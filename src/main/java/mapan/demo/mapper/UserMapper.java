@@ -18,4 +18,6 @@ public interface UserMapper {
 
     @Select("select * from user where token=#{token}")
     List<User> findByToken(@Param("token") String token);
+    @Select("select * from user where id = #{ownerId}")
+    User selectByPrimaryKey(@Param("ownerId") Long ownerId);
 }

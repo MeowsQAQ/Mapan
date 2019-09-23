@@ -36,6 +36,8 @@ public class FileController {
                 fileDTO.setFilename(file.getOriginalFilename());
                 User currentUser = (User)request.getSession().getAttribute("user");
                 fileDTO.setOwnerId(currentUser.getId());
+                fileDTO.setUser(currentUser);
+                fileDTO.setGmtCreate(System.currentTimeMillis());
                 if(!fileService.isFileNameExist(fileDTO.getFilename())){
                     fileService.insertFile(fileDTO);
                 }else{
