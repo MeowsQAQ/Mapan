@@ -47,7 +47,7 @@ public class FileService {
 
         FileQueryDTO fileQueryDTO = new FileQueryDTO();
         fileQueryDTO.setSearch(search);
-        Integer totalCount = fileMapper.countBySearch(fileQueryDTO);
+        Integer totalCount = fileMapper.countInNoSearch(fileQueryDTO);
         PaginationDTO paginationDTO = new PaginationDTO();
         paginationDTO.setPagination(totalCount,page,size);
 
@@ -56,7 +56,7 @@ public class FileService {
         Integer offset = size*(page-1);
         fileQueryDTO.setSize(size);
         fileQueryDTO.setPage(offset);
-        List<File> files = fileMapper.selectBySearch(fileQueryDTO);
+        List<File> files = fileMapper.selectInNoSearch(fileQueryDTO);
         List<FileDTO> fileDTOs = new ArrayList<>();
 
         for (File file : files) {

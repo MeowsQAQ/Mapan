@@ -19,7 +19,7 @@ public interface FileMapper {
     Integer select();
 //    if(isnull(#{search}),select count(1) from file,select count(1) from file where filename regex #{search})
     @Select("select count(1) from file ")
-    Integer countBySearch(FileQueryDTO fileQueryDTO);
+    Integer countInNoSearch(FileQueryDTO fileQueryDTO);
     @Select("select * from file where filename  order by gmt_create desc limit #{page},#{size}")
-    List<File> selectBySearch(FileQueryDTO fileQueryDTO);
+    List<File> selectInNoSearch(FileQueryDTO fileQueryDTO);
 }
