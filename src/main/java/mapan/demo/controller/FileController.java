@@ -51,7 +51,7 @@ public class FileController {
             System.out.println(e);
             FileDTO fileDTO = new FileDTO();
             fileDTO.setSuccess(0);
-            fileDTO.setMessage("上传失败");
+            fileDTO.setMessage("上传失败,"+e.toString().split(":")[1]);
             return fileDTO;
         }
     }
