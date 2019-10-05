@@ -28,14 +28,13 @@
                 <div class="media-left">
                     <a href="#" th:if="${file.user}">
                         <img class="media-object img-circle avatar-size"
-                             th:src="${file.user.avatarUrl}"  alt="...">
+                             th:src="${file.user.avatarUrl}"  alt="..." style="height: 15%">
                     </a>
                     <a href="#"  th:if="${file.user==null}" >
                         <img class="media-object img-circle avatar-size"
                              src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3001793335,1513386932&fm=26&gp=0.jpg" alt="">
                     </a>
                 </div>
-
                 <div class="media-body">
                     <h4 class="media-heading">
                         <a th:href="@{'/file/'+${file.id}}" th:text="${file.filename}"></a>
