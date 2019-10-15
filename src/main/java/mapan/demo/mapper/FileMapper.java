@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper
 public interface FileMapper {
-    @Insert("INSERT INTO file(filename,file_url,owner_id,gmt_create) values (#{filename},#{fileUrl},#{ownerId},#{gmtCreate})")
+    @Insert("INSERT INTO file(filename,file_url,owner_id,gmt_create,className) values (#{filename},#{fileUrl},#{ownerId},#{gmtCreate},#{classify})")
     void insert(FileDTO fileDTO);
 
     @Select("select * from file where filename =#{filename}")
@@ -20,6 +20,6 @@ public interface FileMapper {
 //    if(isnull(#{search}),select count(1) from file,select count(1) from file where filename regex #{search})
     @Select("select count(1) from file ")
     Integer countInNoSearch(FileQueryDTO fileQueryDTO);
-    @Select("select * from file where filename  order by gmt_create desc limit #{page},#{size}")
+    @Select("select * from file  order by gmt_create desc limit #{page},#{size}")
     List<File> selectInNoSearch(FileQueryDTO fileQueryDTO);
 }

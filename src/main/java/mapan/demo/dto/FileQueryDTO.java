@@ -7,4 +7,5 @@ public class FileQueryDTO {
     private String search;
     private Integer page;
     private Integer size;
+    private String classify;
 }

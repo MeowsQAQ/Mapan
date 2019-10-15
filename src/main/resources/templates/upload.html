@@ -25,6 +25,14 @@
         <div class="form-group">
             <form enctype="multipart/form-data" method="post" action="/file/upload">
                 <input type="file" name="upload-file"/>
+                <label for="classify" >请选择类型:</label>
+                <select id="classify" name = "classify">
+                    <option>图片</option>
+                    <option>音乐</option>
+                    <option>视频</option>
+                    <option>文件</option>
+                    <option>其他</option>
+                </select>
                 <input type="submit" value="上传"class="btn btn-default"/>
             </form>
         </div>

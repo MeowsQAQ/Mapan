@@ -38,7 +38,7 @@ public class FileService {
         }
     }
 
-    public PaginationDTO list(String search ,Integer page, Integer size) {
+    public PaginationDTO list(String search ,Integer page, Integer size,String classify) {
         if(StringUtils.isNotBlank(search)){
             String[] tags = StringUtils.split(search," ");
             search = Arrays.stream(tags).collect(Collectors.joining("|"));
@@ -56,6 +56,7 @@ public class FileService {
         Integer offset = size*(page-1);
         fileQueryDTO.setSize(size);
         fileQueryDTO.setPage(offset);
+        fileQueryDTO.setClassify(classify);
         List<File> files = fileMapper.selectInNoSearch(fileQueryDTO);
         List<FileDTO> fileDTOs = new ArrayList<>();
 

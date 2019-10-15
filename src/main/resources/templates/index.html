@@ -74,7 +74,13 @@
             <hr class="bottom-hr">
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3>文件分类</h3>
+            <div class="list-group section">
+                <a href="/classify/image" class="list-group-item" th:classappend="${section=='image'}?'active ':''">图片</a>
+                <a href="/classify/music"   class="list-group-item" th:classappend="${section=='music'}?'active':''">音乐</a>
+                <a href="/classify/video" class="list-group-item" th:classappend="${section=='video'}?'active':''">视频</a>
+                <a href="/classify/mfile" class="list-group-item" th:classappend="${section=='mfile'}?'active':''">文件</a>
+                <a href="/classify/other" class="list-group-item" th:classappend="${section=='other'}?'active':''">其他</a>
+            </div>
         </div>
         <hr>
     </div>

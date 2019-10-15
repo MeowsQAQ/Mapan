@@ -14,4 +14,5 @@ public class FileDTO {
     private Long ownerId;
     private User user;
     private Long gmtCreate;
+    private String classify;
 }

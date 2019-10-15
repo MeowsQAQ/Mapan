@@ -9,6 +9,7 @@ import mapan.demo.provider.UCloudProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -23,7 +24,7 @@ public class FileController {
 
     @RequestMapping("/file/upload")
     @ResponseBody
-    public FileDTO upload(HttpServletRequest request) {
+    public FileDTO upload(@RequestParam("classify") String classify, HttpServletRequest request) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("upload-file");
         try {
@@ -32,6 +33,7 @@ public class FileController {
                 String fileUrl = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());
                 fileDTO.setSuccess(1);
                 fileDTO.setFileUrl(fileUrl);
+                fileDTO.setClassify(classify);
                 fileDTO.setMessage("上传成功");
                 fileDTO.setFilename(file.getOriginalFilename());
                 User currentUser = (User)request.getSession().getAttribute("user");
