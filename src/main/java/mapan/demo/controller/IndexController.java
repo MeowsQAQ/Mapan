@@ -26,7 +26,7 @@ public class IndexController {
                         @RequestParam(name = "search",required = false)String search,
                         Model model){
         PaginationDTO pagination = fileService.list(search,page,size,"");
-        model.addAttribute("section","noSection");
+        model.addAttribute("section","AllFile");
         model.addAttribute("pagination",pagination);
         model.addAttribute("search",search);
         return "index";

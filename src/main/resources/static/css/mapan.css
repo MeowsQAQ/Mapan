@@ -8,3 +8,8 @@
 .avatar-size{
     width: 55px;
 }
+.text-desc{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}

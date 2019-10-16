@@ -22,18 +22,10 @@
     <div class="jumbotron col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
 
-            <h2 th:if="${className}"><span th:text="${className}"></span></h2>
+            <h2 th:if="${section}"><span th:text="${section}"></span></h2>
             <hr>
             <div class="media" th:each="file:${pagination.data}">
                 <div class="media-left">
-<!--                    <a href="#" th:if="${file.user}">-->
-<!--                        <img class="media-object img-rounded avatar-size"-->
-<!--                             th:src="${classUrl}"  alt="..." style="height: 15%">-->
-<!--                    </a>-->
-<!--                    <a href="#"  th:if="${file.user==null}" >-->
-<!--                        <img class="media-object img-rounded avatar-size"-->
-<!--                             src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3001793335,1513386932&fm=26&gp=0.jpg" alt="">-->
-<!--                    </a>-->
                     <a href="#">
                         <img class="media-object img-rounded avatar-size"
                              th:src="${file.classifyUrl}"  alt="..." style="height: 15%">
@@ -41,11 +33,14 @@
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading">
-                        <a th:href="@{'/file/'+${file.id}}" th:text="${file.filename}"></a>
+                        <a th:href="${file.fileUrl}" th:text="${file.filename}"></a>
                     </h4>
-                    <br>
                     <!--                    DATA FORMAT-->
-                    <span th:text="${#dates.format(file.gmtCreate,'dd MMMM yyyy')}"></span>
+                    <span class="text-left" style="font-size: 15px;"><a th:href="@{/delete/(id=${file.id})}" class="text-center">Delete</a></span>
+                    <span class="text-left" style="font-size: 15px;"><a th:href="@{/share/(id=${file.id})}" class="text-center">Share</a></span>
+                    <br>
+                    <span class="text-center">Upload by <a href="#"><span th:text="${file.user.login}"></span></a></span>
+                    <span class="text-desc"><span  class="text-right" th:text="${#dates.format(file.gmtCreate,'dd MMMM yyyy')}"></span></span>
                 </div>
             </div>
             <hr>

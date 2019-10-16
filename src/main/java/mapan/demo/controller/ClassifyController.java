@@ -27,34 +27,34 @@ public class ClassifyController {
         if("image".equals(className)){
             String classify = "image";
             model.addAttribute("classify", ClassifyCode.image);
-            model.addAttribute("section","image");
+            model.addAttribute("section","Image");
             PaginationDTO paginationDTO = fileService.list(search,page,size,classify);
             model.addAttribute("pagination",paginationDTO);
         }else if("music".equals(className)){
             String classify = "music";
             PaginationDTO paginationDTO = fileService.list(search,page,size,classify);
-            model.addAttribute("section","music");
+            model.addAttribute("section","Music");
             model.addAttribute("pagination",paginationDTO);
 
         }else if("video".equals(className)){
             String classify = "video";
             model.addAttribute("classify", ClassifyCode.video);
             PaginationDTO paginationDTO = fileService.list(search,page,size,classify);
-            model.addAttribute("section","video");
+            model.addAttribute("section","Video");
             model.addAttribute("pagination",paginationDTO);
 
         }else if("mfile".equals(className)){
             String classify = "file";
             model.addAttribute("classify", ClassifyCode.file);
             PaginationDTO paginationDTO = fileService.list(search,page,size,classify);
-            model.addAttribute("section","file");
+            model.addAttribute("section","File");
             model.addAttribute("pagination",paginationDTO);
 
         }else if("other".equals(className)){
             String classify = "other";
             model.addAttribute("classify", ClassifyCode.other);
             PaginationDTO paginationDTO = fileService.list(search,page,size,classify);
-            model.addAttribute("section","other");
+            model.addAttribute("section","Other");
             model.addAttribute("pagination",paginationDTO);
 
         }
