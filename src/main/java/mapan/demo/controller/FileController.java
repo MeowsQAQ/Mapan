@@ -33,7 +33,16 @@ public class FileController {
                 String fileUrl = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());
                 fileDTO.setSuccess(1);
                 fileDTO.setFileUrl(fileUrl);
-                fileDTO.setClassify(classify);
+                String className;
+                switch (classify){
+                    case "图片":className= "image";break;
+                    case "音乐":className= "music";break;
+                    case "视频":className= "video";break;
+                    case "文件":className= "file";break;
+                    case "其他":className= "other";break;
+                    default:className= "other";
+                }
+                fileDTO.setClassify(className);
                 fileDTO.setMessage("上传成功");
                 fileDTO.setFilename(file.getOriginalFilename());
                 User currentUser = (User)request.getSession().getAttribute("user");

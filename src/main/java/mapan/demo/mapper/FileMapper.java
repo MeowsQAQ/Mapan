@@ -22,4 +22,6 @@ public interface FileMapper {
     Integer countInNoSearch(FileQueryDTO fileQueryDTO);
     @Select("select * from file  order by gmt_create desc limit #{page},#{size}")
     List<File> selectInNoSearch(FileQueryDTO fileQueryDTO);
+    @Select("select * from file where className=#{classify} order by gmt_create desc limit #{page},#{size}")
+    List<File> selectInClassifyAndNoSearch(FileQueryDTO fileQueryDTO);
 }

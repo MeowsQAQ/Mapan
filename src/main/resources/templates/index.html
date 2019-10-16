@@ -22,17 +22,21 @@
     <div class="jumbotron col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
 
-            <h2><span>File</span></h2>
+            <h2 th:if="${className}"><span th:text="${className}"></span></h2>
             <hr>
             <div class="media" th:each="file:${pagination.data}">
                 <div class="media-left">
-                    <a href="#" th:if="${file.user}">
-                        <img class="media-object img-circle avatar-size"
-                             th:src="${file.user.avatarUrl}"  alt="..." style="height: 15%">
-                    </a>
-                    <a href="#"  th:if="${file.user==null}" >
-                        <img class="media-object img-circle avatar-size"
-                             src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3001793335,1513386932&fm=26&gp=0.jpg" alt="">
+<!--                    <a href="#" th:if="${file.user}">-->
+<!--                        <img class="media-object img-rounded avatar-size"-->
+<!--                             th:src="${classUrl}"  alt="..." style="height: 15%">-->
+<!--                    </a>-->
+<!--                    <a href="#"  th:if="${file.user==null}" >-->
+<!--                        <img class="media-object img-rounded avatar-size"-->
+<!--                             src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3001793335,1513386932&fm=26&gp=0.jpg" alt="">-->
+<!--                    </a>-->
+                    <a href="#">
+                        <img class="media-object img-rounded avatar-size"
+                             th:src="${file.classifyUrl}"  alt="..." style="height: 15%">
                     </a>
                 </div>
                 <div class="media-body">
@@ -78,7 +82,7 @@
                 <a href="/classify/image" class="list-group-item" th:classappend="${section=='image'}?'active ':''">图片</a>
                 <a href="/classify/music"   class="list-group-item" th:classappend="${section=='music'}?'active':''">音乐</a>
                 <a href="/classify/video" class="list-group-item" th:classappend="${section=='video'}?'active':''">视频</a>
-                <a href="/classify/mfile" class="list-group-item" th:classappend="${section=='mfile'}?'active':''">文件</a>
+                <a href="/classify/mfile" class="list-group-item" th:classappend="${section=='file'}?'active':''">文件</a>
                 <a href="/classify/other" class="list-group-item" th:classappend="${section=='other'}?'active':''">其他</a>
             </div>
         </div>

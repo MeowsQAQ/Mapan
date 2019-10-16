@@ -15,4 +15,5 @@ public class FileDTO {
     private User user;
     private Long gmtCreate;
     private String classify;
+    private String classifyUrl;
 }

@@ -5,6 +5,7 @@ import mapan.demo.dto.FileQueryDTO;
 import mapan.demo.dto.PaginationDTO;
 import mapan.demo.mapper.FileMapper;
 import mapan.demo.mapper.UserMapper;
+import mapan.demo.model.ClassifyCode;
 import mapan.demo.model.File;
 import mapan.demo.model.User;
 import org.apache.commons.lang3.StringUtils;
@@ -57,13 +58,19 @@ public class FileService {
         fileQueryDTO.setSize(size);
         fileQueryDTO.setPage(offset);
         fileQueryDTO.setClassify(classify);
-        List<File> files = fileMapper.selectInNoSearch(fileQueryDTO);
+        List<File> files;
+        if (StringUtils.isNotBlank(classify)){
+            files = fileMapper.selectInClassifyAndNoSearch(fileQueryDTO);
+        }else{
+            files = fileMapper.selectInNoSearch(fileQueryDTO);
+        }
         List<FileDTO> fileDTOs = new ArrayList<>();
 
         for (File file : files) {
             User user =userMapper.selectByPrimaryKey(file.getOwnerId());
             FileDTO fileDTO = new FileDTO();
             BeanUtils.copyProperties(file,fileDTO);
+            fileDTO.setClassifyUrl(ClassifyCode.valueOf(file.getClassName()).getClassUrl());
             fileDTO.setUser(user);
             fileDTOs.add(fileDTO);
         }

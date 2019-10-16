@@ -12,5 +12,6 @@ public class File {
     private String filename;
     private Long ownerId;
     private Long gmtCreate;
+    private String className;
 }
 
