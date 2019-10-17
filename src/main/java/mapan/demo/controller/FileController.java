@@ -23,8 +23,7 @@ public class FileController {
     private FileService fileService;
 
     @RequestMapping("/file/upload")
-    @ResponseBody
-    public FileDTO upload(@RequestParam("classify") String classify, HttpServletRequest request) {
+    public String upload(@RequestParam("classify") String classify, HttpServletRequest request) {
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         MultipartFile file = multipartRequest.getFile("upload-file");
         try {
@@ -57,13 +56,13 @@ public class FileController {
             }else {
                 throw new CustomizeException(CustomizeErrorCode.NOT_LOGIN);
             };
-            return fileDTO;
+            return "redirect:/";
         } catch (Exception e) {
             System.out.println(e);
             FileDTO fileDTO = new FileDTO();
             fileDTO.setSuccess(0);
             fileDTO.setMessage("上传失败,"+e.toString().split(":")[1]);
-            return fileDTO;
+            throw new CustomizeException(CustomizeErrorCode.FILE_UPLOAD_ERROR);
         }
     }
 }

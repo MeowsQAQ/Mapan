@@ -11,8 +11,9 @@ public enum CustomizeErrorCode implements  ICustomizeErrorCode{
     CONTENT_IS_EMPTY(2007,"输入内容不能为空"),
     READ_NOTIFICATION_FAIL(2008,"请校验登陆状态"),
     NOTIFICATION_NOT_FOUND(2009,"消息通知找不到了呀"),
-    FILE_UPLOAD_ERROR(2010,"图片上传错误"),
-    FILE_ALREADY_EXIST(2011,"文件已经存在，请检查是否一致");
+    FILE_UPLOAD_ERROR(2010,"文件上传错误"),
+    FILE_ALREADY_EXIST(2011,"文件已经存在，请检查是否一致"),
+    USER_NOTLOGIN_OR_NOTMATCH(2012,"当前未登录或用户信息不匹配");
 
 
 

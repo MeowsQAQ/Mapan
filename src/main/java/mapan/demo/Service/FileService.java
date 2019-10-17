@@ -3,6 +3,8 @@ package mapan.demo.Service;
 import mapan.demo.dto.FileDTO;
 import mapan.demo.dto.FileQueryDTO;
 import mapan.demo.dto.PaginationDTO;
+import mapan.demo.exception.CustomizeErrorCode;
+import mapan.demo.exception.CustomizeException;
 import mapan.demo.mapper.FileMapper;
 import mapan.demo.mapper.UserMapper;
 import mapan.demo.model.ClassifyCode;
@@ -79,4 +81,14 @@ public class FileService {
         return paginationDTO;
     }
 
+    public void deleteFileByIdWithUserIdentification(String fileId, User loginUser) {
+        Integer fileUserId = fileMapper.findFileUserbyFileId(fileId);
+        User fileUser = userMapper.findFilebyUserId(fileUserId);
+        if(loginUser!=null||fileUser==loginUser){
+            fileMapper.deleteFile(fileId);
+        }
+        else{
+            throw new CustomizeException(CustomizeErrorCode.USER_NOTLOGIN_OR_NOTMATCH);
+        }
+    }
 }

@@ -24,4 +24,10 @@ public interface FileMapper {
     List<File> selectInNoSearch(FileQueryDTO fileQueryDTO);
     @Select("select * from file where className=#{classify} order by gmt_create desc limit #{page},#{size}")
     List<File> selectInClassifyAndNoSearch(FileQueryDTO fileQueryDTO);
+    @Select("select * from file where id = #{fileId}")
+    FileDTO findById(@Param("fileId") String fileId);
+    @Select("select owner_id from file where id = #{fileId} ")
+    Integer findFileUserbyFileId(@Param("fileId") String fileId);
+    @Delete("delete from file where id = #{fileId}")
+    void deleteFile(@Param("fileId") String fileId);
 }

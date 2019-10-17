@@ -36,8 +36,17 @@
                         <a th:href="${file.fileUrl}" th:text="${file.filename}"></a>
                     </h4>
                     <!--                    DATA FORMAT-->
-                    <span class="text-left" style="font-size: 15px;"><a th:href="@{/delete/(id=${file.id})}" class="text-center">Delete</a></span>
-                    <span class="text-left" style="font-size: 15px;"><a th:href="@{/share/(id=${file.id})}" class="text-center">Share</a></span>
+                    <div th:if="${session.user!=null}">
+                        <span class="text-left" style="font-size: 15px;" ><a th:href="@{'/delete/'+${file.id}}" class="text-center">Delete</a></span>
+                        <span class="text-left" style="font-size: 15px;"><a href="javascript:void(0);" th:data-url="${file.fileUrl}" class="text-center" id="showShare" onclick=" showShare(this)">Share</a></span>
+                    </div>
+                    <span style="display: none" th:text="${file.fileUrl}"></span>
+                    <script type="application/javascript">
+                        function showShare(e) {
+                            var url =e.getAttribute("data-url")
+                            alert(url)
+                        }
+                    </script>
                     <br>
                     <span class="text-center">Upload by <a href="#"><span th:text="${file.user.login}"></span></a></span>
                     <span class="text-desc"><span  class="text-right" th:text="${#dates.format(file.gmtCreate,'dd MMMM yyyy')}"></span></span>
@@ -74,11 +83,11 @@
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <div class="list-group section">
-                <a href="/classify/image" class="list-group-item" th:classappend="${section=='image'}?'active ':''">图片</a>
-                <a href="/classify/music"   class="list-group-item" th:classappend="${section=='music'}?'active':''">音乐</a>
-                <a href="/classify/video" class="list-group-item" th:classappend="${section=='video'}?'active':''">视频</a>
-                <a href="/classify/mfile" class="list-group-item" th:classappend="${section=='file'}?'active':''">文件</a>
-                <a href="/classify/other" class="list-group-item" th:classappend="${section=='other'}?'active':''">其他</a>
+                <a href="/classify/image" class="list-group-item" th:classappend="${section=='Image'}?'active ':''">图片</a>
+                <a href="/classify/music"   class="list-group-item" th:classappend="${section=='Music'}?'active':''">音乐</a>
+                <a href="/classify/video" class="list-group-item" th:classappend="${section=='Video'}?'active':''">视频</a>
+                <a href="/classify/mfile" class="list-group-item" th:classappend="${section=='File'}?'active':''">文件</a>
+                <a href="/classify/other" class="list-group-item" th:classappend="${section=='Other'}?'active':''">其他</a>
             </div>
         </div>
         <hr>
